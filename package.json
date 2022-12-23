@@ -3,14 +3,28 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prepare": "npm run copy:shiki",
+    "copy:shiki": "npm run copy:shiki-themes && npm run copy:shiki-languages && npm run copy:shiki-wasm",
+    "copy:shiki-themes": "npx shx cp -r ./node_modules/shiki/themes/* ./lib/mdx/shiki/themes",
+    "copy:shiki-languages": "npx shx cp -r ./node_modules/shiki/languages/* ./lib/mdx/shiki/languages",
+    "copy:shiki-wasm": "npx shx cp -r ./node_modules/vscode-oniguruma/release/onig.wasm ./lib/mdx/shiki"
   },
   "dependencies": {
+    "graceful-fs": "^4.2.10",
     "next": "canary",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "rehype-pretty-code": "^0.5.1",
+    "rehype-stringify": "^9.0.3",
+    "remark-frontmatter": "^4.0.1",
+    "remark-parse": "^10.0.1",
+    "remark-rehype": "^10.1.0",
+    "shiki": "^0.12.1",
+    "unified": "^10.1.2"
   },
   "devDependencies": {
+    "shx": "^0.3.4",
     "@types/node": "^18.11.13",
     "@types/react": "^18.0.26",
     "typescript": "^4.9.4"
